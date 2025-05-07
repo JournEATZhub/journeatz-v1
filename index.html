@@ -79,6 +79,19 @@
             filter: drop-shadow(0 0 40px rgba(0, 255, 0, 0.8));
             margin-bottom: 20px;
         }
+        .link-container {
+            margin-top: 20px;
+        }
+        .link-container a {
+            color: #00FF00;
+            text-decoration: none;
+            font-weight: 700;
+            margin: 10px;
+            transition: color 0.3s ease;
+        }
+        .link-container a:hover {
+            color: #FFA500;
+        }
     </style>
 </head>
 <body>
@@ -87,9 +100,11 @@
     </div>
     <h1>Welcome to JournEATZ</h1>
     <p>Your platform is live and ready for configuration.</p>
-    <a href="/login.html" class="button">Login</a>
-    <a href="/signup.html" class="button">Sign Up</a>
-    <a href="/dashboard.html" class="button">Dashboard</a>
-    <a href="/orders.html" class="button">Order Tracking</a>
+    <div class="link-container">
+        <a href="/login.html" class="button">Login</a>
+        <a href="/signup.html" class="button">Sign Up</a>
+        <a href="/dashboard.html" class="button">Dashboard</a>
+        <a href="/orders.html" class="button">Order Tracking</a>
+    </div>
 </body>
 </html>
