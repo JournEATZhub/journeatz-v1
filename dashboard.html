@@ -13,12 +13,8 @@
 
         async function checkSession() {
             const { data: { session }, error } = await supabase.auth.getSession();
-            if (error) {
-                console.error('Session error:', error.message);
-                alert('You are not logged in. Redirecting to login...');
-                window.location.href = '/login.html';
-            }
-            if (!session) {
+            if (error || !session) {
+                console.error('Session error:', error ? error.message : 'No active session');
                 alert('You are not logged in. Redirecting to login...');
                 window.location.href = '/login.html';
             } else {
