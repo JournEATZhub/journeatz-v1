@@ -25,14 +25,14 @@
                     .eq('email', user.email)
                     .single();
 
-                if (profileError) {
-                    console.error('Profile error:', profileError.message);
+                if (profileError || !profile) {
+                    console.error('Profile error:', profileError ? profileError.message : 'Profile not found');
                     alert('Error loading profile. Redirecting to login...');
                     window.location.href = '/login.html';
+                } else {
+                    document.getElementById('username').innerText = user.email;
+                    document.getElementById('role').innerText = profile.role.toUpperCase();
                 }
-
-                document.getElementById('username').innerText = user.email;
-                document.getElementById('role').innerText = profile.role.toUpperCase();
             }
         }
 
