@@ -6,29 +6,6 @@
     <title>JournEATZ - Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.0.0/dist/umd/supabase.js"></script>
-    <script>
-        const supabaseUrl = 'https://njyvknzyzdcpuoqemyqo.supabase.co';
-        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5qeXZrbnp5emRjcHVvcWVteXFvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY1NjE3MzMsImV4cCI6MjA2MjEzNzczM30.Hcy7iN86JMIrLpEtyh9hzD0AniNO7cKHsW6eIGUAc7c';
-        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
-
-        async function checkSession() {
-            const { data: { session } } = await supabase.auth.getSession();
-            if (!session) {
-                alert('You are not logged in. Redirecting to login...');
-                window.location.href = '/login.html';
-            } else {
-                document.getElementById('username').innerText = session.user.email;
-            }
-        }
-
-        async function logout() {
-            await supabase.auth.signOut();
-            alert('Logged out successfully. Redirecting to login...');
-            window.location.href = '/login.html';
-        }
-
-        window.onload = checkSession;
-    </script>
     <style>
         body {
             background-color: #111;
@@ -44,23 +21,30 @@
             text-align: center;
         }
         h1 {
-            color: #00FF00;
+            color: #FFA500;
             font-size: 3em;
             margin-bottom: 20px;
-            text-shadow: 0 0 15px #00FF00, 0 0 30px #00FF00;
+            text-shadow: 0 0 15px #FFA500, 0 0 30px #FFA500;
             text-transform: uppercase;
         }
-        .welcome {
+        .order-list {
             background-color: #222;
-            padding: 30px;
+            padding: 20px;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(255, 255, 0, 0.6);
+            box-shadow: 0 10px 30px rgba(255, 165, 0, 0.6);
             width: 100%;
-            max-width: 400px;
+            max-width: 600px;
             margin-bottom: 30px;
+            text-align: left;
         }
-        .logout-button {
-            background-color: #FFA500;
+        .order-item {
+            background-color: #333;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+        }
+        button {
+            background-color: #00FF00;
             color: #000;
             padding: 15px 30px;
             border: none;
@@ -70,17 +54,81 @@
             width: 100%;
             transition: all 0.3s ease;
         }
-        .logout-button:hover {
-            background-color: #FFD700;
+        button:hover {
+            background-color: #32CD32;
             color: #fff;
         }
     </style>
 </head>
 <body>
-    <h1>Welcome to Your Dashboard</h1>
-    <div class="welcome">
-        <p>Welcome, <span id="username">User</span>! Your platform is ready.</p>
+    <h1>Your Dashboard</h1>
+    <p id="user-email"></p>
+    <div class="order-list" id="order-list">
+        <h2>Your Orders</h2>
+        <div id="orders"></div>
     </div>
-    <button class="logout-button" onclick="logout()">Logout</button>
+    <button onclick="handleLogout()">Logout</button>
+
+    <script>
+        const supabaseUrl = 'https://njyvknzyzdcpuoqemyqo.supabase.co';
+        const supabaseKey = 'YOUR_ANON_PUBLIC_KEY';  // Replace with your actual anon key
+        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+        async function loadDashboard() {
+            try {
+                const { data: { session }, error } = await supabase.auth.getSession();
+                if (error || !session) {
+                    alert('You are not logged in. Redirecting to login...');
+                    window.location.href = '/login.html';
+                    return;
+                }
+
+                // Show user email
+                const userEmail = session.user.email;
+                document.getElementById('user-email').textContent = `Logged in as: ${userEmail}`;
+
+                // Fetch user orders
+                const { data: userData } = await supabase.from('users').select('id').eq('email', userEmail).single();
+                const userId = userData.id;
+
+                const { data: orders, error: orderError } = await supabase
+                    .from('orders')
+                    .select('id, kitchen_id, status, created_at')
+                    .eq('user_id', userId);
+
+                if (orderError) throw orderError;
+
+                const orderList = document.getElementById('orders');
+                orders.forEach(order => {
+                    const orderItem = document.createElement('div');
+                    orderItem.classList.add('order-item');
+                    orderItem.innerHTML = `
+                        <p>Order ID: ${order.id}</p>
+                        <p>Kitchen ID: ${order.kitchen_id}</p>
+                        <p>Status: ${order.status}</p>
+                        <p>Created At: ${new Date(order.created_at).toLocaleString()}</p>
+                    `;
+                    orderList.appendChild(orderItem);
+                });
+
+            } catch (error) {
+                console.error(error.message);
+                alert('Error loading dashboard. Please try again.');
+            }
+        }
+
+        async function handleLogout() {
+            const { error } = await supabase.auth.signOut();
+            if (!error) {
+                alert('Logged out successfully.');
+                window.location.href = '/login.html';
+            } else {
+                alert('Error logging out. Please try again.');
+            }
+        }
+
+        // Load the dashboard on page load
+        loadDashboard();
+    </script>
 </body>
 </html>
