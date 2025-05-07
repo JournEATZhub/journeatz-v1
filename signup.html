@@ -3,8 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JournEATZ - Signup</title>
+    <title>JournEATZ - Sign Up</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.0.0/dist/umd/supabase.js"></script>
+    <script>
+        const supabaseUrl = 'https://njyvknzyzdcpuoqemyqo.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5qeXZrbnp5emRjcHVvcWVteXFvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY1NjE3MzMsImV4cCI6MjA2MjEzNzczM30.Hcy7iN86JMIrLpEtyh9hzD0AniNO7cKHsW6eIGUAc7c';
+        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+        async function signUp(event) {
+            event.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const { error } = await supabase.auth.signUp({
+                email: email,
+                password: password
+            });
+            if (error) {
+                alert('Sign Up Error: ' + error.message);
+            } else {
+                alert('Sign Up Successful! Redirecting to login...');
+                window.location.href = '/login.html';
+            }
+        }
+    </script>
     <style>
         body {
             background-color: #111;
@@ -20,32 +42,31 @@
             text-align: center;
         }
         h1 {
-            color: #00FF00;
+            color: #FFA500;
             font-size: 3em;
             margin-bottom: 20px;
-            text-shadow: 0 0 15px #00FF00, 0 0 30px #00FF00;
+            text-shadow: 0 0 15px #FFA500, 0 0 30px #FFA500;
             text-transform: uppercase;
         }
         form {
             background-color: #222;
             padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(255, 255, 0, 0.6);
+            box-shadow: 0 10px 30px rgba(255, 165, 0, 0.6);
             width: 100%;
             max-width: 400px;
+            margin-bottom: 30px;
         }
-        input[type="text"], input[type="email"], input[type="password"] {
+        input[type="email"], input[type="password"] {
             width: 100%;
-            margin-bottom: 20px;
             padding: 15px;
+            margin-bottom: 15px;
+            border: none;
             border-radius: 5px;
-            border: 1px solid #444;
-            background-color: #333;
-            color: #fff;
             font-size: 1em;
         }
-        button {
-            background-color: #FFA500;
+        button[type="submit"] {
+            background-color: #00FF00;
             color: #000;
             padding: 15px 30px;
             border: none;
@@ -55,36 +76,19 @@
             width: 100%;
             transition: all 0.3s ease;
         }
-        button:hover {
-            background-color: #FFD700;
+        button[type="submit"]:hover {
+            background-color: #32CD32;
             color: #fff;
-        }
-        .link-container {
-            margin-top: 20px;
-        }
-        .link-container a {
-            color: #FFD700;
-            text-decoration: none;
-            font-weight: 700;
-            margin: 10px;
-            transition: color 0.3s ease;
-        }
-        .link-container a:hover {
-            color: #FFA500;
         }
     </style>
 </head>
 <body>
-    <h1>Create an Account</h1>
-    <form action="/dashboard.html" method="post">
-        <input type="text" placeholder="Full Name" required>
-        <input type="email" placeholder="Email" required>
-        <input type="password" placeholder="Password" required>
-        <input type="password" placeholder="Confirm Password" required>
+    <h1>Create Your JournEATZ Account</h1>
+    <form onsubmit="signUp(event)">
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="password" id="password" placeholder="Password" required>
         <button type="submit">Sign Up</button>
     </form>
-    <div class="link-container">
-        <a href="/login.html">Already have an account? Login</a>
-    </div>
+    <p>Already have an account? <a href="/login.html" style="color: #FFA500;">Login here</a>.</p>
 </body>
 </html>
