@@ -7,13 +7,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.0.0/dist/umd/supabase.js"></script>
     <script>
-        // Initialize Supabase here before using it
+        // Initialize Supabase client
         const supabaseUrl = 'https://njyvknzyzdcpuoqemyqo.supabase.co';
         const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5qeXZrbnp5emRjcHVvcWVteXFvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY1NjE3MzMsImV4cCI6MjA2MjEzNzczM30.Hcy7iN86JMIrLpEtyh9hzD0AniNO7cKHsW6eIGUAc7c';
         const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
         async function handleSignup(event) {
             event.preventDefault();
+
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
@@ -30,8 +31,8 @@
                     alert('Sign up successful! Check your email for confirmation.');
                     window.location.href = '/login.html';
                 }
-            } catch (error) {
-                console.error('Error during signup:', error.message);
+            } catch (err) {
+                console.error('Error during signup:', err.message);
                 alert('An unexpected error occurred. Please try again.');
             }
         }
