@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login to JournEATZ</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.25.0/dist/umd/supabase.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.25.0/dist/umd/supabase.min.js"></script>
     <script>
         const supabaseUrl = 'https://pkwiqdvbkkseotkpugmr.supabase.co';
         const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBrd2lxZHZia2tzZW90a3B1Z21yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY1Nzg1MzcsImV4cCI6MjA2MjE1NDUzN30.eOo2GFt7g5B9oeHCalmeCgPopF9twmR0IctrgFiBbps';
-        window.supabase = supabase.createClient(supabaseUrl, supabaseKey);
+        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
         async function handleLogin(event) {
             event.preventDefault();
