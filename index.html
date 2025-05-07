@@ -1,11 +1,85 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JournEATZ V1</title>
-    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #111;
+            color: #fff;
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+            background-image: url('Neon Dinner with Friends.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        h1 {
+            color: #ffffff;
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px #ffffff, 0 0 30px #ffffff;
+            letter-spacing: 1px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        p {
+            color: #f0f0f0;
+            font-size: 1.6em;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            margin-bottom: 40px;
+            text-shadow: 0 0 5px #ffffff, 0 0 15px #ffffff;
+        }
+        a.button {
+            background-color: rgba(255, 0, 255, 0.8);
+            color: #ffffff;
+            padding: 15px 30px;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 30px;
+            margin: 10px;
+            box-shadow: 0 8px 30px rgba(255, 0, 255, 0.6), 0 8px 60px rgba(255, 0, 255, 0.4);
+            transition: all 0.4s ease;
+            font-size: 1.2em;
+            letter-spacing: 0.5px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(15px);
+            background-image: linear-gradient(135deg, rgba(255, 0, 255, 0.9), rgba(255, 150, 255, 0.7));
+            animation: neon-pulse 2.5s infinite alternate;
+        }
+        a.button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(255, 0, 255, 0.9), 0 15px 80px rgba(255, 0, 255, 0.7);
+            border: 2px solid #ffffff;
+            background-image: linear-gradient(135deg, rgba(255, 0, 255, 1), rgba(255, 255, 255, 0.8));
+            background-color: rgba(255, 0, 255, 1);
+        }
+        @keyframes neon-pulse {
+            0% {
+                box-shadow: 0 0 15px rgba(255, 0, 255, 0.6), 0 0 30px rgba(255, 0, 255, 0.4);
+            }
+            100% {
+                box-shadow: 0 0 30px rgba(255, 0, 255, 0.9), 0 0 60px rgba(255, 0, 255, 0.7);
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to JournEATZ V1</h1>
+    <h1>Welcome to JournEATZ</h1>
     <p>Your platform is live and ready for configuration.</p>
+    <a href="/login.html" class="button">Login</a>
+    <a href="/signup.html" class="button">Sign Up</a>
+    <a href="/dashboard.html" class="button">Dashboard</a>
+    <a href="/orders.html" class="button">Order Tracking</a>
 </body>
 </html>
