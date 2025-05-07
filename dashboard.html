@@ -70,8 +70,9 @@
     <button onclick="handleLogout()">Logout</button>
 
     <script>
-        const supabaseUrl = 'https://njyvknzyzdcpuoqemyqo.supabase.co';
-        const supabaseKey = 'YOUR_ANON_PUBLIC_KEY';  // Replace with your actual anon key
+        // Use your updated Supabase URL and Anon Key
+        const supabaseUrl = 'https://pkwiqdvbkkseotkpugmr.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBrd2lxZHZia2tzZW90a3B1Z21yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY1Nzg1MzcsImV4cCI6MjA2MjE1NDUzN30.eOo2GFt7g5B9oeHCalmeCgPopF9twmR0IctrgFiBbps';
         const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
         async function loadDashboard() {
