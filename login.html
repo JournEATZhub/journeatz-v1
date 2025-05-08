@@ -15,18 +15,34 @@
             event.preventDefault();
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
+
             try {
-                const { data, error } = await supabase.auth.signInWithPassword({
-                    email: email,
-                    password: password,
-                });
-                if (error) {
-                    console.error('Login error:', error.message);
-                    alert('Login Error: ' + error.message);
-                } else {
-                    alert('Login successful! Redirecting to dashboard...');
-                    window.location.href = '/dashboard.html';
+                // Check login credentials
+                const { data, error } = await supabase.from('users').select('*').eq('email', email).eq('password', password).single();
+
+                if (error || !data) {
+                    alert('Login failed: Invalid email or password');
+                    return;
                 }
+
+                // Redirect based on user role
+                switch (data.role) {
+                    case 'admin':
+                        window.location.href = '/admin-dashboard.html';
+                        break;
+                    case 'driver':
+                        window.location.href = '/driver-dashboard.html';
+                        break;
+                    case 'kitchen':
+                        window.location.href = '/kitchen-dashboard.html';
+                        break;
+                    case 'customer':
+                        window.location.href = '/customer-dashboard.html';
+                        break;
+                    default:
+                        alert('Invalid role');
+                }
+
             } catch (err) {
                 console.error('Unexpected error:', err.message);
                 alert('An unexpected error occurred. Please try again.');
