@@ -1,1 +1,58 @@
-
+<!-- Customer Dashboard -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #444;
+            color: #fff;
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: #FFD700;
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px #FFD700, 0 0 30px #FFD700;
+        }
+        .dashboard-card {
+            background-color: #666;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 600px;
+            text-align: left;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.6);
+        }
+        a {
+            color: #FFD700;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Customer Dashboard</h1>
+    <div class="dashboard-card">
+        <h2>Order History</h2>
+        <p><a href="#">View Past Orders</a></p>
+        <p><a href="#">Track Current Orders</a></p>
+    </div>
+    <div class="dashboard-card">
+        <h2>Account Settings</h2>
+        <p><a href="#">Update Profile</a></p>
+        <p><a href="#">Logout</a></p>
+    </div>
+</body>
+</html>
